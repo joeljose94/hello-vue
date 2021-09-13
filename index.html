@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="/assets/style.css" />
+    <title>Books VueJS</title>
+    <!-- Import Vue -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <h1>Hello, Readers!</h1>
+    <div id="app">
+        <!-- simple functions-->
+        <div v-if="showBooks">
+            <p><b>Book Title:</b> {{ title }} | <b>Author:</b> {{ author }} | <b>Rating:</b> {{ rating }}</p>
+            <button @click="increaseRating()">Increase Rating</button>
+            <button @click="decreaseRating()">Decrease Rating</button>
+        </div>
+        <div v-else>
+            <p>Click button to display book</p>
+        </div>
+        <br>
+        <button @click="toggleBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+        <div v-show="showBooks">currently showing books</div>
+
+        <div>
+            <ul>
+                <li @click="changeFav(book)" v-for="book in books" :class="{ fav: book.isFav}">
+                    <img :src="book.img" :alt="book.title">
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author }}</p>
+                </li>
+            </ul>
+            <p>Selected Books:</p>
+            <ul>
+                <li v-for="book in favBooks"> {{ book.title }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
